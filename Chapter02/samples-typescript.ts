@@ -32,3 +32,30 @@ myBoolean = (myString === "test");
 if(myBoolean) {
   myNumber = 1;
 }
+
+// inferred types:
+let inferredString = "this is a string";
+let inferredNumber = 1;
+// inferredString = inferredNumber; // type 'number' is not assignable to type 'string'
+
+// Duck typing:
+let complexType = { name: "myName", id: 1 };
+complexType = { id: 2, name: "another name" };
+// complexType = { id: 2 }; // error TS2322: Type '{ id: number }' is not assignable to type '{ name: string; id: number; }'. Property 'name' is missing in type '{ id: number; }'.
+
+// complexType = { name: "extraproperty", id: 2, extraProp: true} 
+//error TS2322: Type '{ name: string; id: number; extraProp: boolean; }' is not assignabel to type '{ name: string; id: number; }'.
+// Object literal may only specify known properties, and 'extraProp' does not exist in type '{ name: string; id: number; }'.
+
+// Template strings:
+const complexObject = {
+  id: 2, 
+  name: 'testObject'
+}
+
+console.log(`complexObject = ${JSON.stringify(complexObject)}`);
+
+// Arrays
+let arrayOfNumbers: number[] = [1, 2, 3];
+arrayOfNumbers = [3, 4, 5, 6, 7, 8, 9];
+console.log(`arrayOfNumbers: ${arrayOfNumbers}`);
