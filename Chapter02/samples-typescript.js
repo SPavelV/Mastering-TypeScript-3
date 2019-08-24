@@ -102,6 +102,29 @@ var DoorStateThird;
     DoorStateThird[DoorStateThird["Closed"] = 1] = "Closed";
     DoorStateThird[DoorStateThird["Ajar"] = 2] = "Ajar";
 })(DoorStateThird || (DoorStateThird = {}));
+// Enum implementation
 var ajarDoor = DoorStateThird[2];
 console.log("--- ajarDoor is: " + ajarDoor);
+var globalString;
+setGlobalString();
+console.log("--- globalString: " + globalString);
+function setGlobalString() {
+    globalString = "this has been set";
+}
+// Dotted property types
+var normalObject = {
+    id: 1,
+    name: "test"
+};
+var stringObject = {
+    "testProperty": 1,
+    "anotherProperty": "this is a string"
+};
+var testProperty = stringObject.testProperty;
+console.log("--- testPropertyValue = " + testProperty);
+var testStringProperty = stringObject["testProperty"];
+console.log("--- \"testPropertyValue\" = " + testStringProperty);
+// Numberic Separators
+var oneMillion = 1000000;
+console.log("--- oneMillon = " + oneMillion);
 //# sourceMappingURL=samples-typescript.js.map

@@ -128,5 +128,36 @@ enum DoorStateThird {
   Ajar
 }
 
+// Enum implementation
 const ajarDoor = DoorStateThird[2];
 console.log(`--- ajarDoor is: ${ajarDoor}`);
+
+let globalString: string;
+setGlobalString();
+console.log(`--- globalString: ${globalString!}`);
+function setGlobalString() {
+  globalString = "this has been set";
+}
+
+// Dotted property types
+let normalObject = {
+  id: 1,
+  name: "test"
+}
+
+let stringObject = {
+  "testProperty": 1,
+  "anotherProperty": "this is a string"
+}
+
+let testProperty = stringObject.testProperty;
+console.log(`--- testPropertyValue = ${testProperty}`);
+let testStringProperty = stringObject["testProperty"];
+console.log(`--- "testPropertyValue" = ${testStringProperty}`);
+
+// Numberic Separators
+let oneMillion = 1_000_000;
+console.log(`--- oneMillon = ${oneMillion}`);
+
+let limeGreenColor = 0x00_FF_00;
+console.log(`--- limeGreenColor = ${limeGreenColor}`);
