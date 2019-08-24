@@ -59,3 +59,74 @@ console.log(`complexObject = ${JSON.stringify(complexObject)}`);
 let arrayOfNumbers: number[] = [1, 2, 3];
 arrayOfNumbers = [3, 4, 5, 6, 7, 8, 9];
 console.log(`arrayOfNumbers: ${arrayOfNumbers}`);
+// arrayOfNumbers = ["1", "2", "3"];  // Type 'string[]' is not assignable to type 'number[]'
+
+// for
+console.log("--- for:");
+const arrayOfStrings : string[] = ["first", "second", "third"];
+for( var i = 0; i < arrayOfStrings.length; i++ ) {
+  console.log(`--- arrayOfStrings[${i}] = ${arrayOfStrings[i]}`);
+}
+
+// for...in 
+console.log("--- for...in:");
+for( const itemKey in arrayOfStrings) {
+  const itemValue = arrayOfStrings[itemKey];
+  console.log(`--- arrayOfStrings[${itemKey}]", ${itemValue}`);
+}
+
+// for...of
+console.log("--- for...of",);
+for( const arrayItem of arrayOfStrings ) {
+  console.log(`a--- rrayItem = ${arrayItem}`);
+}
+
+// enam
+console.log("--- enum:");
+enum DoorState {
+  Open,
+  Closed,
+  Ajar
+}
+
+const openDoor = DoorState.Open;
+console.log(`--- openDoor is: ${openDoor}`);
+
+const closedDoor = DoorState["Closed"];
+console.log(`--- closeDoor is : ${closedDoor}`);
+
+enum DoorStateSecond {
+  Open = 3,
+  Closed = 7,
+  Ajar = 10
+}
+
+const enum DoorStateConst {
+  Open,
+  Closed,
+  Ajar
+}
+
+const constDoorOpen = DoorStateConst.Open;
+console.log(`--- constDoorOpen is: ${constDoorOpen}`);
+
+// String Enum: 
+console.log("--- String Enum",);
+enum DoorStateString {
+  Open = "open",
+  Closed = "closed",
+  Ajar = "ajar"
+}
+
+const openDoorString = DoorStateString.Open;
+console.log(`--- openDoorString = ${openDoorString}`);
+
+// Enum realization:
+enum DoorStateThird {
+  Open,
+  Closed,
+  Ajar
+}
+
+const ajarDoor = DoorStateThird[2];
+console.log(`--- ajarDoor is: ${ajarDoor}`);

@@ -25,4 +25,83 @@ myBoolean = (myString === "test");
 if (myBoolean) {
     myNumber = 1;
 }
+// inferred types:
+var inferredString = "this is a string";
+var inferredNumber = 1;
+// inferredString = inferredNumber; // type 'number' is not assignable to type 'string'
+// Duck typing:
+var complexType = { name: "myName", id: 1 };
+complexType = { id: 2, name: "another name" };
+// complexType = { id: 2 }; // error TS2322: Type '{ id: number }' is not assignable to type '{ name: string; id: number; }'. Property 'name' is missing in type '{ id: number; }'.
+// complexType = { name: "extraproperty", id: 2, extraProp: true} 
+//error TS2322: Type '{ name: string; id: number; extraProp: boolean; }' is not assignabel to type '{ name: string; id: number; }'.
+// Object literal may only specify known properties, and 'extraProp' does not exist in type '{ name: string; id: number; }'.
+// Template strings:
+var complexObject = {
+    id: 2,
+    name: 'testObject'
+};
+console.log("complexObject = " + JSON.stringify(complexObject));
+// Arrays
+var arrayOfNumbers = [1, 2, 3];
+arrayOfNumbers = [3, 4, 5, 6, 7, 8, 9];
+console.log("arrayOfNumbers: " + arrayOfNumbers);
+// arrayOfNumbers = ["1", "2", "3"];  // Type 'string[]' is not assignable to type 'number[]'
+// for
+console.log("--- for:");
+var arrayOfStrings = ["first", "second", "third"];
+for (var i = 0; i < arrayOfStrings.length; i++) {
+    console.log("--- arrayOfStrings[" + i + "] = " + arrayOfStrings[i]);
+}
+// for...in 
+console.log("--- for...in:");
+for (var itemKey in arrayOfStrings) {
+    var itemValue = arrayOfStrings[itemKey];
+    console.log("--- arrayOfStrings[" + itemKey + "]\", " + itemValue);
+}
+// for...of
+console.log("--- for...of");
+for (var _i = 0, arrayOfStrings_1 = arrayOfStrings; _i < arrayOfStrings_1.length; _i++) {
+    var arrayItem = arrayOfStrings_1[_i];
+    console.log("a--- rrayItem = " + arrayItem);
+}
+// enam
+console.log("--- enum:");
+var DoorState;
+(function (DoorState) {
+    DoorState[DoorState["Open"] = 0] = "Open";
+    DoorState[DoorState["Closed"] = 1] = "Closed";
+    DoorState[DoorState["Ajar"] = 2] = "Ajar";
+})(DoorState || (DoorState = {}));
+var openDoor = DoorState.Open;
+console.log("--- openDoor is: " + openDoor);
+var closedDoor = DoorState["Closed"];
+console.log("--- closeDoor is : " + closedDoor);
+var DoorStateSecond;
+(function (DoorStateSecond) {
+    DoorStateSecond[DoorStateSecond["Open"] = 3] = "Open";
+    DoorStateSecond[DoorStateSecond["Closed"] = 7] = "Closed";
+    DoorStateSecond[DoorStateSecond["Ajar"] = 10] = "Ajar";
+})(DoorStateSecond || (DoorStateSecond = {}));
+var constDoorOpen = 0 /* Open */;
+console.log("--- constDoorOpen is: " + constDoorOpen);
+// String Enum: 
+console.log("--- String Enum");
+var DoorStateString;
+(function (DoorStateString) {
+    DoorStateString["Open"] = "open";
+    DoorStateString["Closed"] = "closed";
+    DoorStateString["Ajar"] = "ajar";
+})(DoorStateString || (DoorStateString = {}));
+var openDoorString = DoorStateString.Open;
+console.log("--- openDoorString = " + openDoorString);
+// Enum realization:
+var DoorStateThird;
+(function (DoorStateThird) {
+    DoorStateThird[DoorStateThird["Open"] = 0] = "Open";
+    DoorStateThird[DoorStateThird["Closed"] = 1] = "Closed";
+    DoorStateThird[DoorStateThird["Ajar"] = 2] = "Ajar";
+})(DoorStateThird || (DoorStateThird = {}));
+var ajarDoor = DoorStateThird[2];
+console.log("--- ajarDoor is: " + ajarDoor);
 //# sourceMappingURL=samples-typescript.js.map
