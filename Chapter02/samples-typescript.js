@@ -127,4 +127,6 @@ console.log("--- \"testPropertyValue\" = " + testStringProperty);
 // Numberic Separators
 var oneMillion = 1000000;
 console.log("--- oneMillon = " + oneMillion);
+var limeGreenColor = 65280;
+console.log("--- limeGreenColor = " + limeGreenColor);
 //# sourceMappingURL=samples-typescript.js.map
