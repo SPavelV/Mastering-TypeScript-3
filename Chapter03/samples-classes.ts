@@ -33,3 +33,18 @@ let classB = new ClassB();
 
 printClass(classA);
 printClass(classB);
+
+// Class constructors
+// ==========
+
+class ClassWithConstructor {
+  id: number;
+  name: string;
+  constructor(_id: number, _name: string) {
+    this.id = _id;
+    this.name = _name;
+  }
+}
+
+const classWithConstructor = new ClassWithConstructor(1, "name");
+console.log(`classWithConstructor = ${JSON.stringify(classWithConstructor)}`);
