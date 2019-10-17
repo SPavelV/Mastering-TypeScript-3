@@ -52,6 +52,17 @@ console.log(`classWithConstructor = ${JSON.stringify(classWithConstructor)}`);
 // Class functions
 // ==========
 
+interface IComplexType {
+  id: number;
+  name: string;
+  print(): string;
+  usingTheAnyKeyword(arg1: any): any;
+  usingOptionalParameters(optionalArg?: number): void;
+  usingDefaultParameters(defaultArg1?: number): void;
+  usingRestSyntax(...argArray: number[]) : void;
+  usingFunctionCallbacks(callback: (id: number) => string):void;
+}
+
 class ComplexType implements IComplexType {
   id: number;
   name: string;
@@ -78,11 +89,11 @@ class ComplexType implements IComplexType {
     }
   }
 
-  usingDefalutParameters(defaultArg1: number = 0) {
+  usingDefaultParameters(defaultArg1: number = 0) {
     this.id = defaultArg1;
   }
 
-  usingRestSynax(...argArray: number[]) {
+  usingRestSyntax(...argArray: number[]) {
     if(argArray.length > 0) {
       this.id = argArray[0];
     }
@@ -103,8 +114,8 @@ ct_1.usingTheAnyKeyword({ id: 1, name: "string"});
 ct_1.usingOptionalParameters(1);
 ct_1.usingOptionalParameters();
 
-ct_1.usingRestSynax(1, 2, 3);
-ct_2.usingRestSynax(1, 2, 3, 4, 5);
+ct_1.usingRestSyntax(1, 2, 3);
+ct_2.usingRestSyntax(1, 2, 3, 4, 5);
 
 function myCallbackFunction(id: number): string {
   return id.toString();
