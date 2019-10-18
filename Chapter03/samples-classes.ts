@@ -123,4 +123,22 @@ function myCallbackFunction(id: number): string {
 ct_1.usingFunctionCallbacks(myCallbackFunction);
 // let ct_3 = new ComplexType(true, "test");
 
+//  Class modifiers
+//  ==========
 
+class ClassWithPublicProperty {
+  public id: number | undefined;
+}
+
+let publicAccess = new ClassWithPublicProperty();
+publicAccess.id = 10;
+
+class ClassWithPrivateProperty {
+  private id: number;
+  constructor(_id : number) {
+    this.id = _id;
+  }
+}
+
+let privateAccess = new ClassWithPrivateProperty(10);
+// privateAccess.id = 20; // error: Property 'id' is private and only accassible within class 'ClassWithPrivateProperty'.
