@@ -165,3 +165,23 @@ class ClassWithReadOnly {
     // this.name = _name; // error: Cannot to 'name' because it is a constant or readonly property.
   }
 }
+
+// Class property accessors
+// =========
+
+class ClassWithAccessors {
+  private _id: number | undefined;
+  get id() {
+    console.log(`inside get id()`);
+    return <number>this._id;
+  }
+  set id(value: number) {
+    console.log(`inside set id()`);
+    this._id = value;
+    
+  }
+}
+
+var classWithAccessors = new ClassWithAccessors();
+classWithAccessors.id = 2;
+console.log(`id property is set to ${classWithAccessors.id}`);
