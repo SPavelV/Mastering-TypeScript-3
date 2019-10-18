@@ -142,3 +142,26 @@ class ClassWithPrivateProperty {
 
 let privateAccess = new ClassWithPrivateProperty(10);
 // privateAccess.id = 20; // error: Property 'id' is private and only accassible within class 'ClassWithPrivateProperty'.
+
+class classWithAutomaticProperties {
+  constructor(public id: number, private name: string) {
+
+  }
+}
+
+let myAutoClass = new classWithAutomaticProperties(1, "className");
+
+console.log(`MyAutoClass.id: ${myAutoClass.id}`);
+// console.log(`MyAutoClass.name: ${myAutoClass.name}`); // Property 'name' is private and only accassable within class 'classWithAutomaticProperties'.
+
+class ClassWithReadOnly {
+  readonly name: string;
+
+  constructor(_name: string) {
+    this.name = _name;
+  }
+
+  setReadOnly(_name: string) {
+    // this.name = _name; // error: Cannot to 'name' because it is a constant or readonly property.
+  }
+}
