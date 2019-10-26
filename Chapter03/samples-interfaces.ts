@@ -7,7 +7,7 @@ interface IComplexType {
 }
 
 let complexType: IComplexType;
-complexType = { id: 1, name: "test" };
+// complexType = { id: 1, name: "test" };
 
 let incompleteType : IComplexType;
 // incompleteType = { id: 1}

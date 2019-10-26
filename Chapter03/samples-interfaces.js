@@ -2,7 +2,7 @@
 // Interfaces
 // ==========
 var complexType;
-complexType = { id: 1, name: "test" };
+// complexType = { id: 1, name: "test" };
 var incompleteType;
 var idOnly = { id: 1 };
 var idAndName = { id: 2, name: "idName" };

@@ -42,56 +42,54 @@ var ClassWithConstructor = /** @class */ (function () {
 }());
 var classWithConstructor = new ClassWithConstructor(1, "name");
 console.log("classWithConstructor = " + JSON.stringify(classWithConstructor));
-var ComplexType = /** @class */ (function () {
-    function ComplexType(idArg, nameArg) {
-        if (typeof idArg === "number") {
-            this.id = idArg;
-        }
-        this.name = nameArg;
-    }
-    ComplexType.prototype.print = function () {
-        return "id" + this.id + " name:" + this.name;
-    };
-    ComplexType.prototype.usingTheAnyKeyword = function (arg1) {
-        this.id = arg1;
-    };
-    ComplexType.prototype.usingOptionalParameters = function (optionalArg) {
-        if (optionalArg) {
-            this.id = optionalArg;
-        }
-    };
-    ComplexType.prototype.usingDefaultParameters = function (defaultArg1) {
-        if (defaultArg1 === void 0) { defaultArg1 = 0; }
-        this.id = defaultArg1;
-    };
-    ComplexType.prototype.usingRestSyntax = function () {
-        var argArray = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            argArray[_i] = arguments[_i];
-        }
-        if (argArray.length > 0) {
-            this.id = argArray[0];
-        }
-    };
-    ComplexType.prototype.usingFunctionCallbacks = function (callback) {
-        callback(this.id);
-    };
-    return ComplexType;
-}());
-var ct_1 = new ComplexType(1, 'ct_1');
-var ct_2 = new ComplexType("abc", "ct_2");
-ct_2.print();
-ct_1.usingTheAnyKeyword(true);
-ct_1.usingTheAnyKeyword({ id: 1, name: "string" });
-ct_1.usingOptionalParameters(1);
-ct_1.usingOptionalParameters();
-ct_1.usingRestSyntax(1, 2, 3);
-ct_2.usingRestSyntax(1, 2, 3, 4, 5);
-function myCallbackFunction(id) {
-    return id.toString();
-}
-ct_1.usingFunctionCallbacks(myCallbackFunction);
-// let ct_3 = new ComplexType(true, "test");
+// class ComplexType implements IComplexType {
+//   id: number;
+//   name: string;
+//   constructor(idArg: number, nameArg: string);
+//   constructor(idArg: string, nameArg: string);
+//   constructor(idArg: any, nameArg: any) {
+//     if (typeof idArg === "number") {
+//       this.id = idArg;
+//     }
+//     this.name = nameArg;
+//   }
+//   print(): string {
+//     return "id" + this.id + " name:" + this.name;
+//   }
+//   usingTheAnyKeyword(arg1: any): any {
+//     this.id = arg1;
+//   }
+//   usingOptionalParameters(optionalArg?: number) {
+//     if(optionalArg) {
+//       this.id = optionalArg;
+//     }
+//   }
+//   usingDefaultParameters(defaultArg1: number = 0) {
+//     this.id = defaultArg1;
+//   }
+//   usingRestSyntax(...argArray: number[]) {
+//     if(argArray.length > 0) {
+//       this.id = argArray[0];
+//     }
+//   }
+//   usingFunctionCallbacks( callback: (id: number) => string) {
+//     callback(this.id);
+//   }
+// }
+// let ct_1 = new ComplexType(1, 'ct_1');
+// let ct_2 = new ComplexType("abc", "ct_2");
+// ct_2.print();
+// ct_1.usingTheAnyKeyword(true);
+// ct_1.usingTheAnyKeyword({ id: 1, name: "string"});
+// ct_1.usingOptionalParameters(1);
+// ct_1.usingOptionalParameters();
+// ct_1.usingRestSyntax(1, 2, 3);
+// ct_2.usingRestSyntax(1, 2, 3, 4, 5);
+// function myCallbackFunction(id: number): string {
+//   return id.toString();
+// }
+// ct_1.usingFunctionCallbacks(myCallbackFunction);
+// // let ct_3 = new ComplexType(true, "test");
 //  Class modifiers
 //  ==========
 var ClassWithPublicProperty = /** @class */ (function () {
@@ -118,4 +116,64 @@ var classWithAutomaticProperties = /** @class */ (function () {
 }());
 var myAutoClass = new classWithAutomaticProperties(1, "className");
 console.log("MyAutoClass.id: " + myAutoClass.id);
-console.log("MyAutoClass.name: " + myAutoClass.name);
+// console.log(`MyAutoClass.name: ${myAutoClass.name}`); // Property 'name' is private and only accassable within class 'classWithAutomaticProperties'.
+var ClassWithReadOnly = /** @class */ (function () {
+    function ClassWithReadOnly(_name) {
+        this.name = _name;
+    }
+    ClassWithReadOnly.prototype.setReadOnly = function (_name) {
+        // this.name = _name; // error: Cannot to 'name' because it is a constant or readonly property.
+    };
+    return ClassWithReadOnly;
+}());
+// Class property accessors
+// =========
+var ClassWithAccessors = /** @class */ (function () {
+    function ClassWithAccessors() {
+    }
+    Object.defineProperty(ClassWithAccessors.prototype, "id", {
+        get: function () {
+            console.log("inside get id()");
+            return this._id;
+        },
+        set: function (value) {
+            console.log("inside set id()");
+            this._id = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return ClassWithAccessors;
+}());
+var classWithAccessors = new ClassWithAccessors();
+classWithAccessors.id = 2;
+console.log("id property is set to " + classWithAccessors.id);
+// Static functions 
+// ==========
+var StaticClass = /** @class */ (function () {
+    function StaticClass() {
+    }
+    StaticClass.printTwo = function () {
+        console.log("2");
+    };
+    return StaticClass;
+}());
+StaticClass.printTwo();
+// Static properties
+// ==========
+var StaticProperty = /** @class */ (function () {
+    function StaticProperty() {
+    }
+    StaticProperty.prototype.updateCount = function () {
+        StaticProperty.count++;
+    };
+    StaticProperty.count = 0;
+    return StaticProperty;
+}());
+var firstInstance = new StaticProperty();
+console.log("StaticProperty.conunt = " + StaticProperty.count);
+firstInstance.updateCount();
+console.log("StaticProperty.count = " + StaticProperty.count);
+var secondInstance = new StaticProperty();
+secondInstance.updateCount();
+console.log("StaticProperty.count = " + StaticProperty.count);

@@ -1,3 +1,4 @@
+import { NameSpaceClass } from './samples-classes';
 class SimpleClass {
   id: number | undefined;
   print() : void {
@@ -63,65 +64,65 @@ interface IComplexType {
   usingFunctionCallbacks(callback: (id: number) => string):void;
 }
 
-class ComplexType implements IComplexType {
-  id: number;
-  name: string;
-  constructor(idArg: number, nameArg: string);
-  constructor(idArg: string, nameArg: string);
-  constructor(idArg: any, nameArg: any) {
-    if (typeof idArg === "number") {
-      this.id = idArg;
-    }
-    this.name = nameArg;
-  }
+// class ComplexType implements IComplexType {
+//   id: number;
+//   name: string;
+//   constructor(idArg: number, nameArg: string);
+//   constructor(idArg: string, nameArg: string);
+//   constructor(idArg: any, nameArg: any) {
+//     if (typeof idArg === "number") {
+//       this.id = idArg;
+//     }
+//     this.name = nameArg;
+//   }
 
-  print(): string {
-    return "id" + this.id + " name:" + this.name;
-  }
+//   print(): string {
+//     return "id" + this.id + " name:" + this.name;
+//   }
 
-  usingTheAnyKeyword(arg1: any): any {
-    this.id = arg1;
-  }
+//   usingTheAnyKeyword(arg1: any): any {
+//     this.id = arg1;
+//   }
 
-  usingOptionalParameters(optionalArg?: number) {
-    if(optionalArg) {
-      this.id = optionalArg;
-    }
-  }
+//   usingOptionalParameters(optionalArg?: number) {
+//     if(optionalArg) {
+//       this.id = optionalArg;
+//     }
+//   }
 
-  usingDefaultParameters(defaultArg1: number = 0) {
-    this.id = defaultArg1;
-  }
+//   usingDefaultParameters(defaultArg1: number = 0) {
+//     this.id = defaultArg1;
+//   }
 
-  usingRestSyntax(...argArray: number[]) {
-    if(argArray.length > 0) {
-      this.id = argArray[0];
-    }
-  }
+//   usingRestSyntax(...argArray: number[]) {
+//     if(argArray.length > 0) {
+//       this.id = argArray[0];
+//     }
+//   }
 
-  usingFunctionCallbacks( callback: (id: number) => string) {
-    callback(this.id);
-  }
-}
+//   usingFunctionCallbacks( callback: (id: number) => string) {
+//     callback(this.id);
+//   }
+// }
 
-let ct_1 = new ComplexType(1, 'ct_1');
-let ct_2 = new ComplexType("abc", "ct_2");
-ct_2.print();
+// let ct_1 = new ComplexType(1, 'ct_1');
+// let ct_2 = new ComplexType("abc", "ct_2");
+// ct_2.print();
 
-ct_1.usingTheAnyKeyword(true);
-ct_1.usingTheAnyKeyword({ id: 1, name: "string"});
+// ct_1.usingTheAnyKeyword(true);
+// ct_1.usingTheAnyKeyword({ id: 1, name: "string"});
 
-ct_1.usingOptionalParameters(1);
-ct_1.usingOptionalParameters();
+// ct_1.usingOptionalParameters(1);
+// ct_1.usingOptionalParameters();
 
-ct_1.usingRestSyntax(1, 2, 3);
-ct_2.usingRestSyntax(1, 2, 3, 4, 5);
+// ct_1.usingRestSyntax(1, 2, 3);
+// ct_2.usingRestSyntax(1, 2, 3, 4, 5);
 
-function myCallbackFunction(id: number): string {
-  return id.toString();
-}
-ct_1.usingFunctionCallbacks(myCallbackFunction);
-// let ct_3 = new ComplexType(true, "test");
+// function myCallbackFunction(id: number): string {
+//   return id.toString();
+// }
+// ct_1.usingFunctionCallbacks(myCallbackFunction);
+// // let ct_3 = new ComplexType(true, "test");
 
 //  Class modifiers
 //  ==========
@@ -185,3 +186,55 @@ class ClassWithAccessors {
 var classWithAccessors = new ClassWithAccessors();
 classWithAccessors.id = 2;
 console.log(`id property is set to ${classWithAccessors.id}`);
+
+// Static functions 
+// ==========
+
+class StaticClass {
+  static printTwo() {
+    console.log(`2`);
+  }
+}
+
+StaticClass.printTwo();
+
+// Static properties
+// ==========
+
+class StaticProperty {
+  static count = 0;
+  updateCount() {
+    StaticProperty.count++;
+  }
+}
+
+let firstInstance = new StaticProperty();
+console.log(`StaticProperty.conunt = ${StaticProperty.count}`);
+firstInstance.updateCount();
+
+console.log(`StaticProperty.count = ${StaticProperty.count}`);
+let secondInstance = new StaticProperty();
+
+secondInstance.updateCount();
+console.log(`StaticProperty.count = ${StaticProperty.count}`);
+
+// Namespaces
+// ==========
+
+namespace FirstNameSpace {
+  class NotExportedSpace {}
+  export class NameSpaceClass{
+    id: number | undefined;
+  }
+}
+
+let firstNameSpace = new FirstNameSpace.NameSpaceClass();
+// let notExported = new FirstNameSpace.NotExported(); // error TS2339: Property 'NotExported does not exist on type 'typeOf FirstNameSpace'
+
+namespace SecondNameSpace {
+  export class NameSpaceClass {
+    name: string | undefined;
+  }
+}
+
+let secondNameSpace = new SecondNameSpace.NameSpaceClass();
