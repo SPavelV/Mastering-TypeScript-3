@@ -1,4 +1,3 @@
-import { NameSpaceClass } from './samples-classes';
 class SimpleClass {
   id: number | undefined;
   print() : void {

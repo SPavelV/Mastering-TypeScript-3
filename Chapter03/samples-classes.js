@@ -177,3 +177,31 @@ console.log("StaticProperty.count = " + StaticProperty.count);
 var secondInstance = new StaticProperty();
 secondInstance.updateCount();
 console.log("StaticProperty.count = " + StaticProperty.count);
+// Namespaces
+// ==========
+var FirstNameSpace;
+(function (FirstNameSpace) {
+    var NotExportedSpace = /** @class */ (function () {
+        function NotExportedSpace() {
+        }
+        return NotExportedSpace;
+    }());
+    var NameSpaceClass = /** @class */ (function () {
+        function NameSpaceClass() {
+        }
+        return NameSpaceClass;
+    }());
+    FirstNameSpace.NameSpaceClass = NameSpaceClass;
+})(FirstNameSpace || (FirstNameSpace = {}));
+var firstNameSpace = new FirstNameSpace.NameSpaceClass();
+// let notExported = new FirstNameSpace.NotExported(); // error TS2339: Property 'NotExported does not exist on type 'typeOf FirstNameSpace'
+var SecondNameSpace;
+(function (SecondNameSpace) {
+    var NameSpaceClass = /** @class */ (function () {
+        function NameSpaceClass() {
+        }
+        return NameSpaceClass;
+    }());
+    SecondNameSpace.NameSpaceClass = NameSpaceClass;
+})(SecondNameSpace || (SecondNameSpace = {}));
+var secondNameSpace = new SecondNameSpace.NameSpaceClass();
