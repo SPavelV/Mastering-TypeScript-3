@@ -101,3 +101,39 @@ class DerivedFromProtected extends ClassUsingProtected {
 const derivedFromProtected = new DerivedFromProtected();
 // derivedFromProtected.id = 1;
 console.log(`getId returns: ${derivedFromProtected.getId()}`);
+
+// Abstract classes
+// =========
+
+abstract class AbstractEmployee {
+  public id: number | undefined;
+  name: string | undefined;
+  abstract getDetails(): string;
+  public printDetails() {
+    console.log(this.getDetails());
+  }
+}
+
+class NewEmployee extends AbstractEmployee{
+  getDetails(): string {
+    return `id: ${this.id}` + `, name ${name}`;
+  }
+}
+
+class NewManager extends NewEmployee {
+  public Employees: NewEmployee[] | undefined;
+  getDetails(): string {
+    return super.getDetails() + `, employeeCount ${this.Employees.length}`
+  }
+}
+
+const employee = new NewEmployee;
+employee.id = 1;
+employee.name = "Employee Name";
+employee.printDetails();
+
+const manager = new NewManager();
+manager.id = 2;
+manager.name = "Manager Name"
+manager.Employees = [];
+manager.printDetails();
