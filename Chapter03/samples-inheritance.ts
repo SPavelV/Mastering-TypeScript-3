@@ -83,3 +83,21 @@ console.log(derivedClassWithFunction.getProperties());
 
 // Protected class members
 // ==========
+
+class ClassUsingProtected {
+  protected id: number | undefined;
+  public getId() {
+    return this.id;
+  }
+}
+
+class DerivedFromProtected extends ClassUsingProtected {
+  constructor() {
+    super();
+    this.id = 0;
+  }
+}
+
+const derivedFromProtected = new DerivedFromProtected();
+// derivedFromProtected.id = 1;
+console.log(`getId returns: ${derivedFromProtected.getId()}`);
