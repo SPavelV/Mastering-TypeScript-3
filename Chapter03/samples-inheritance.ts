@@ -123,7 +123,7 @@ class NewEmployee extends AbstractEmployee{
 class NewManager extends NewEmployee {
   public Employees: NewEmployee[] | undefined;
   getDetails(): string {
-    return super.getDetails() + `, employeeCount ${this.Employees.length}`
+    return super.getDetails() + `, employeeCount`
   }
 }
 

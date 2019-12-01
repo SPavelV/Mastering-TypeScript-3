@@ -79,3 +79,64 @@ var derivedClassWithFunction = new DerivedClassWithFunction();
 derivedClassWithFunction.id = 1;
 derivedClassWithFunction.name = "derivedName";
 console.log(derivedClassWithFunction.getProperties());
+// Protected class members
+// ==========
+var ClassUsingProtected = /** @class */ (function () {
+    function ClassUsingProtected() {
+    }
+    ClassUsingProtected.prototype.getId = function () {
+        return this.id;
+    };
+    return ClassUsingProtected;
+}());
+var DerivedFromProtected = /** @class */ (function (_super) {
+    __extends(DerivedFromProtected, _super);
+    function DerivedFromProtected() {
+        var _this = _super.call(this) || this;
+        _this.id = 0;
+        return _this;
+    }
+    return DerivedFromProtected;
+}(ClassUsingProtected));
+var derivedFromProtected = new DerivedFromProtected();
+// derivedFromProtected.id = 1;
+console.log("getId returns: " + derivedFromProtected.getId());
+// Abstract classes
+// =========
+var AbstractEmployee = /** @class */ (function () {
+    function AbstractEmployee() {
+    }
+    AbstractEmployee.prototype.printDetails = function () {
+        console.log(this.getDetails());
+    };
+    return AbstractEmployee;
+}());
+var NewEmployee = /** @class */ (function (_super) {
+    __extends(NewEmployee, _super);
+    function NewEmployee() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    NewEmployee.prototype.getDetails = function () {
+        return "id: " + this.id + (", name " + name);
+    };
+    return NewEmployee;
+}(AbstractEmployee));
+var NewManager = /** @class */ (function (_super) {
+    __extends(NewManager, _super);
+    function NewManager() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    NewManager.prototype.getDetails = function () {
+        return _super.prototype.getDetails.call(this) + ", employeeCount";
+    };
+    return NewManager;
+}(NewEmployee));
+var employee = new NewEmployee;
+employee.id = 1;
+employee.name = "Employee Name";
+employee.printDetails();
+var manager = new NewManager();
+manager.id = 2;
+manager.name = "Manager Name";
+manager.Employees = [];
+manager.printDetails();
