@@ -33,3 +33,19 @@ function decoratorFactory(name: string) {
 
 @decoratorFactory('testName')
 class ClassWithDecoratorFactory{}
+
+// Class decorator parameters
+// ==========================
+
+function classConstructorDec(constructor: Function) {
+  console.log(`constructor : ${constructor}`);
+  console.log(`constructor.name : ${(<any>constructor.name)}`);
+  constructor.prototype.testProperty = "testProperty_value";
+}
+
+@classConstructorDec
+class CalssWithConstructor {}
+
+let classConstructorInstance = new CalssWithConstructor();
+console.log(`classConstrInstance.testProperty : ${(<any>classConstructorInstance).testProperty}`);
+

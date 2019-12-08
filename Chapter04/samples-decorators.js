@@ -49,3 +49,20 @@ var ClassWithDecoratorFactory = /** @class */ (function () {
     ], ClassWithDecoratorFactory);
     return ClassWithDecoratorFactory;
 }());
+// Class decorator parameters
+// ==========================
+function classConstructorDec(constructor) {
+    console.log("constructor : " + constructor);
+    console.log("constructor.name : " + constructor.name);
+    constructor.prototype.testProperty = "testProperty_value";
+}
+var CalssWithConstructor = /** @class */ (function () {
+    function CalssWithConstructor() {
+    }
+    CalssWithConstructor = __decorate([
+        classConstructorDec
+    ], CalssWithConstructor);
+    return CalssWithConstructor;
+}());
+var classConstructorInstance = new CalssWithConstructor();
+console.log("classConstrInstance.testProperty : " + classConstructorInstance.testProperty);
