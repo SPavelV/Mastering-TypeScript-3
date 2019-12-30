@@ -1,4 +1,3 @@
-"use strict";
 // Decorator syntax
 // ================
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -66,3 +65,19 @@ var CalssWithConstructor = /** @class */ (function () {
 }());
 var classConstructorInstance = new CalssWithConstructor();
 console.log("classConstrInstance.testProperty : " + classConstructorInstance.testProperty);
+// Property decorators
+// ===================
+function propertyDec(target, propertyKey) {
+    console.log('target: ', target);
+    console.log('target.constructor: ', target.constructor);
+    console.log('class name:', target.constructor.name);
+    console.log('propertyKey', propertyKey);
+}
+var ClassWithPropertyDec = /** @class */ (function () {
+    function ClassWithPropertyDec() {
+    }
+    __decorate([
+        propertyDec
+    ], ClassWithPropertyDec.prototype, "name");
+    return ClassWithPropertyDec;
+}());
