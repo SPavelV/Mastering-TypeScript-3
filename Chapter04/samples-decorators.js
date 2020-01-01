@@ -72,10 +72,13 @@ console.log("classConstrInstance.testProperty : " + classConstructorInstance.tes
 // Property decorators
 // ===================
 function propertyDec(target, propertyKey) {
-    console.log('target: ', target);
-    console.log('target.constructor: ', target.constructor);
-    console.log('class name:', target.constructor.name);
-    console.log('propertyKey', propertyKey);
+    if (typeof (target) === 'function') {
+        console.log('class name: ', target.name);
+    }
+    else {
+        console.log('class name: ', target.constructor.name);
+    }
+    console.log('propertyKey: ', propertyKey);
 }
 var ClassWithPropertyDec = /** @class */ (function () {
     function ClassWithPropertyDec() {
