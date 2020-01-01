@@ -1,3 +1,4 @@
+"use strict";
 // Decorator syntax
 // ================
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -5,6 +6,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 function simpleDecorator(constructor) {
     console.log('simpleDecorator called.');
@@ -77,7 +81,17 @@ var ClassWithPropertyDec = /** @class */ (function () {
     function ClassWithPropertyDec() {
     }
     __decorate([
-        propertyDec
-    ], ClassWithPropertyDec.prototype, "name");
+        propertyDec,
+        __metadata("design:type", Object)
+    ], ClassWithPropertyDec.prototype, "name", void 0);
     return ClassWithPropertyDec;
+}());
+var StaticClassWithPropertyDec = /** @class */ (function () {
+    function StaticClassWithPropertyDec() {
+    }
+    __decorate([
+        propertyDec,
+        __metadata("design:type", String)
+    ], StaticClassWithPropertyDec, "aname", void 0);
+    return StaticClassWithPropertyDec;
 }());

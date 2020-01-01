@@ -61,5 +61,10 @@ function propertyDec(target: any, propertyKey: string) {
 
 class ClassWithPropertyDec {
   @propertyDec
-  name: string;
+  name: string | undefined;
+}
+
+class StaticClassWithPropertyDec {
+  @propertyDec
+  static aname: string;
 }
