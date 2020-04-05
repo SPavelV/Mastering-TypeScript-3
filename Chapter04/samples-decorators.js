@@ -10,6 +10,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 // function simpleDecorator(constructor: Function) {
 //   console.log("simpleDecorator called.");
 // }
@@ -67,8 +70,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 //   @propertyDec
 //   static aname: string;
 // }
-// Method decorators
-// =================
+// // Method decorators
+// // =================
 // function methodDec(
 //   target: any,
 //   methodName: string,
@@ -84,34 +87,50 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 //     console.log(`ClassWithMethodDec.print` + `(${output}) called.`);
 //   }
 // }
-// Using method decorators
-// =======================
-function auditLogDec(target, methodName, descriptor) {
-    var originalFunction = target[methodName];
-    var auditFunction = function () {
-        console.log("auditLogDec : overide of " + methodName + " called");
-        for (var index = 0; index < arguments.length; index++) {
-            var element = arguments[index];
-            console.log("arg : " + index + " = " + arguments[index]);
-        }
-        originalFunction.apply(this, arguments);
-    };
-    target[methodName] = auditFunction;
-    return target;
+// // Using method decorators
+// // =======================
+// function auditLogDec(
+//   target: any,
+//   methodName: string,
+//   descriptor?: PropertyDescriptor
+// ) {
+//   let originalFunction = target[methodName];
+//   let auditFunction = function(this: any) {
+//     console.log(`auditLogDec : overide of ${methodName} called`);
+//     for (let index = 0; index < arguments.length; index++) {
+//       const element = arguments[index];
+//       console.log(`arg : ${index} = ${arguments[index]}`);
+//     }
+//     originalFunction.apply(this, arguments);
+//   };
+//   target[methodName] = auditFunction;
+//   return target;
+// }
+// class ClassWithAuditDec {
+//   @auditLogDec
+//   print(arg1: string, arg2: string) {
+//     console.log(`ClassWithMethodDec.print ${arg1}, ${arg2} called.`);
+//   }
+// }
+// let auditClass = new ClassWithAuditDec();
+// auditClass.print("test1", "test2");
+// Parameter decorators
+// ====================
+function parameterDec(target, methodName, parameterIndex) {
+    console.log("target: " + target);
+    console.log("methodName: " + methodName);
+    console.log("parameterIndex; " + parameterIndex);
 }
-var ClassWithAuditDec = /** @class */ (function () {
-    function ClassWithAuditDec() {
+var ClassWithParamDec = /** @class */ (function () {
+    function ClassWithParamDec() {
     }
-    ClassWithAuditDec.prototype.print = function (arg1, arg2) {
-        console.log("ClassWithMethodDec.print " + arg1 + ", " + arg2 + " called.");
+    ClassWithParamDec.prototype.print = function (value) {
     };
     __decorate([
-        auditLogDec,
+        __param(0, parameterDec),
         __metadata("design:type", Function),
-        __metadata("design:paramtypes", [String, String]),
+        __metadata("design:paramtypes", [String]),
         __metadata("design:returntype", void 0)
-    ], ClassWithAuditDec.prototype, "print", null);
-    return ClassWithAuditDec;
+    ], ClassWithParamDec.prototype, "print", null);
+    return ClassWithParamDec;
 }());
-var auditClass = new ClassWithAuditDec();
-auditClass.print("test1", "test2");
