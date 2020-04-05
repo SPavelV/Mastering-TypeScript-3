@@ -1,6 +1,4 @@
 "use strict";
-// // Decorator syntax
-// // ================
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -13,6 +11,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
+Object.defineProperty(exports, "__esModule", { value: true });
+require("reflect-metadata");
+// // Decorator syntax
+// // ================
 // function simpleDecorator(constructor: Function) {
 //   console.log("simpleDecorator called.");
 // }
@@ -114,23 +116,53 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 // }
 // let auditClass = new ClassWithAuditDec();
 // auditClass.print("test1", "test2");
-// Parameter decorators
-// ====================
-function parameterDec(target, methodName, parameterIndex) {
-    console.log("target: " + target);
-    console.log("methodName: " + methodName);
-    console.log("parameterIndex; " + parameterIndex);
+// // Parameter decorators
+// // ====================
+// function parameterDec(target: any, methodName: string, parameterIndex: number) {
+//   console.log(`target: ${target}`);
+//   console.log(`methodName: ${methodName}`);
+//   console.log(`parameterIndex: ${parameterIndex}`);
+// }
+// class ClassWithParamDec {
+//   print(@parameterDec value: string) {}
+// }
+// // Decorator metadata
+// // ==================
+// function metadataParameterDec(
+//   target: any,
+//   methodName: string,
+//   parameterIndex: number
+// ) {}
+// class ClassWithMetaData {
+//   print(
+//     @metadataParameterDec
+//     id: number,
+//     name: string
+//   ): number {
+//     return 1000;
+//   }
+// }
+// Decorator metadata
+// ==================
+function metadataParameterDec2(target, methodName, parameterIndex) {
+    var designType = Reflect.getMetadata("design: type", target, methodName);
+    console.log("designType:" + designType);
+    var designParamTypes = Reflect.getMetadata("design: paramtypes", target, methodName);
+    console.log("paramtypes: " + designParamTypes);
+    var designReturnType = Reflect.getMetadata("design: returntype", target, methodName);
+    console.log("returntypes: " + designReturnType);
 }
-var ClassWithParamDec = /** @class */ (function () {
-    function ClassWithParamDec() {
+var ClassWithMetaData2 = /** @class */ (function () {
+    function ClassWithMetaData2() {
     }
-    ClassWithParamDec.prototype.print = function (value) {
+    ClassWithMetaData2.prototype.print = function (id, name) {
+        return 1000;
     };
     __decorate([
-        __param(0, parameterDec),
+        __param(0, metadataParameterDec2),
         __metadata("design:type", Function),
-        __metadata("design:paramtypes", [String]),
-        __metadata("design:returntype", void 0)
-    ], ClassWithParamDec.prototype, "print", null);
-    return ClassWithParamDec;
+        __metadata("design:paramtypes", [Number, String]),
+        __metadata("design:returntype", Number)
+    ], ClassWithMetaData2.prototype, "print", null);
+    return ClassWithMetaData2;
 }());
